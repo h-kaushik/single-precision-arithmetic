@@ -1,0 +1,25 @@
+module complex_adder
+(
+	input clk, rst,
+	input [31:0] x_real, x_imag, y_real, y_imag,
+	input opr,	// 0 -> Add; 1 -> Sub
+	output [31:0] xpy_real, xpy_imag
+);
+	fpu_adder ca1(
+		.clk(clk),
+		.rst(rst),
+		.A(x_real),
+		.B(y_real),
+		.sub(opr),
+		.s(xpy_real)
+	);
+
+	fpu_adder ca2(
+		.clk(clk),
+		.rst(rst),
+		.A(x_imag),
+		.B(y_imag),
+		.sub(opr),
+		.s(xpy_imag)
+	);
+endmodule
